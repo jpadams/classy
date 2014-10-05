@@ -4,14 +4,14 @@
 
 # This hackily extracts the group ID of the "PE MCollective" group from the NC
 # ToDo: rewrite this
-PEMCoID=$(curl --cacert `puppet agent --configprint localcacert` --cert `puppet agent --configprint hostcert` --key `puppet agent --configprint hostprivkey` --insecure https://localhost:4433/classifier-api/v1/groups| python -m json.tool |grep -C 2 "PE MCollective" | grep "id" | cut -d: -f2 | sed 's/[\", ]//g')
+PEMCoID=$(curl --cacert `/opt/puppet/bin/puppet agent --configprint localcacert` --cert `/opt/puppet/bin/puppet agent --configprint hostcert` --key `/opt/puppet/bin/puppet agent --configprint hostprivkey` --insecure https://localhost:4433/classifier-api/v1/groups| python -m json.tool |grep -C 2 "PE MCollective" | grep "id" | cut -d: -f2 | sed 's/[\", ]//g')
 
-echo "####################################"
+echo "#######PE MCollective group rule####"
 
 # This will pretty print the JSON of the "PE MCollective" group in the NC
-curl -k --cacert `puppet agent --configprint localcacert` --cert `puppet agent --configprint hostcert` --key `puppet agent --configprint hostprivkey` --insecure https://localhost:4433/classifier-api/v1/groups/$PEMCoID | python -m json.tool
+curl -k --cacert `/opt/puppet/bin/puppet agent --configprint localcacert` --cert `/opt/puppet/bin/puppet agent --configprint hostcert` --key `/opt/puppet/bin/puppet agent --configprint hostprivkey` --insecure https://localhost:4433/classifier-api/v1/groups/$PEMCoID | python -m json.tool
 
-echo "####################################"
+echo "#######update rule w/is_admin fact##"
 
 # This will update the matching rule of the "PE MCollective" group and print resulting JSON
 # note: "00000000-0000-4000-8000-000000000000" is the root group
