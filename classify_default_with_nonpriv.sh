@@ -13,7 +13,6 @@ curl -X POST -H 'Content-Type: application/json' \
     "name": "default",
     "classes": {
       "nonpriv": {
-        "suffix": "nonroot",
         "password": "puppetlabs",
         "server": "master.inf.puppetlabs.demo"
       }
